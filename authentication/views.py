@@ -1,4 +1,3 @@
-
 import json
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework import filters
@@ -51,7 +50,7 @@ class RegisterUsersView(generics.CreateAPIView):
         )
 
 
-class UserProfileView(generics.UpdateAPIView):
+class UserProfileView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     permission_classes = (permissions.IsAuthenticated,)
     authentication_class = JSONWebTokenAuthentication
@@ -97,5 +96,3 @@ class UserProfileView(generics.UpdateAPIView):
                 'detail': str(e)
             }
         return Response(response, status=status_code)
-
-

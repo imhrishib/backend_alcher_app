@@ -4,8 +4,6 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from phonenumber_field.modelfields import PhoneNumberField
-from PIL import Image
-import random
 
 
 class CustomAccountManager(BaseUserManager):
@@ -31,6 +29,7 @@ class CustomAccountManager(BaseUserManager):
         user.save()
         return user
 
+
 class NewUser(AbstractBaseUser, PermissionsMixin):
     id = models.SlugField(primary_key=True, default=uuid.uuid4)
     email = models.EmailField(_('email address'), unique=True)
@@ -50,3 +49,5 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.id)
+
+

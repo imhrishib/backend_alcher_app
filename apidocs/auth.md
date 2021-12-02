@@ -179,3 +179,94 @@ PUT /auth/profile
 ```
 
 
+# Reset Password Request
+
+```http
+POST /auth/password_reset
+```
+This API will generate a OTP and send a mail to the recipent. OTP will expire after 6 minutes
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Data constraints**
+
+```json
+{
+    "email": "[valid email address]",
+}
+```
+
+**Data example**
+
+```json
+{
+    "email": "abcd@abcd.com",
+}
+```
+**Success Response example**
+
+```json
+{
+    "status": "OK"
+}
+```
+**Error Response example**
+
+```json
+{
+    "email": [
+        "We couldn't find an account associated with that email. Please try a different e-mail address."
+    ]
+}
+```
+
+
+
+# Reset Password Confirmation
+
+```http
+POST /auth/password_resetconfirm/
+```
+This API will reset the password
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Data constraints**
+
+```json
+{
+    "password": "[password in plain text, more than 6 characters must not be similar to email address]",
+    "token": "[OTP sent in mail]"
+}
+```
+
+**Data example**
+
+```json
+{
+    "password": "ABCDabcd789",
+    "token": "53219982"
+}
+```
+**Success Response example**
+
+```json
+{
+    "status": "OK"
+}
+```
+**Error Response example**
+
+```json
+{
+    "detail": "Not found."
+}
+```
+
+
+
+
